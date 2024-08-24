@@ -11,17 +11,19 @@ public class Request {
     private String factoryName;
     private String personData;
     private String email;
-    private MultipartFile pdfFile;
-    private MultipartFile zipFile;
+    private String type;
+    private MultipartFile pdfFileRequest;
+    private MultipartFile pdfFileOTO;
     private String description;
     private LocalDateTime localDateTime;
 
-    public Request(String factoryName, String personData, String email, MultipartFile pdfFile, MultipartFile zipFile, String description) {
+    public Request(String factoryName, String personData, String email, String type, MultipartFile pdfFileRequest, MultipartFile pdfFileOTO, String description) {
         this.factoryName = factoryName;
         this.personData = personData;
         this.email = email;
-        this.pdfFile = pdfFile;
-        this.zipFile = zipFile;
+        this.type = type;
+        this.pdfFileRequest = pdfFileRequest;
+        this.pdfFileOTO = pdfFileOTO;
         this.description = description;
         this.localDateTime = LocalDateTime.now();
     }

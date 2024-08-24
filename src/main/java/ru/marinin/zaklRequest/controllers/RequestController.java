@@ -20,11 +20,16 @@ public class RequestController {
     }
 
     @PostMapping("/add")
-    public String addProduct(@RequestParam String factoryName, @RequestParam String personData, @RequestParam String email,
-                             @RequestParam("pdfFile") MultipartFile pdfFile, @RequestParam("zipFile") MultipartFile zipFile,
+    public String addProduct(@RequestParam String factoryName, @RequestParam String personData, @RequestParam String email, @RequestParam String type,
+                             @RequestParam("pdfFileRequest") MultipartFile pdfFileRequest, @RequestParam("pdfFileOTO") MultipartFile pdfFileOTO,
                              @RequestParam String description, Model model) throws IOException {
-        MultipartFileToFile.saveMultipartFile(pdfFile, "../Request");
-        MultipartFileToFile.saveMultipartFile(zipFile, "../Request");
-        return "redirect:/";
+        MultipartFileToFile.saveMultipartFile(pdfFileRequest, "../Request");
+        MultipartFileToFile.saveMultipartFile(pdfFileOTO, "../Request");
+        return "redirect:/request_answer";
+    }
+
+    @GetMapping("/request_answer")
+    public String answer() {
+        return "answer";
     }
 }

@@ -20,7 +20,7 @@
                 <form action="/add" method="post" enctype="multipart/form-data">
 
                     <div class='form-group mb-2'>
-                        <label class='form-label'>Наименование заявителя</label>
+                        <label class='form-label'>Наименование организации</label>
                         <input type="text" name="factoryName" placeholder="Введите наименование организации" class="form-control">
                     </div><br>
 
@@ -35,13 +35,18 @@
                     </div><br>
 
                     <div class='form-group mb-2'>
-                        <label class='form-label'>Приложите PDF-файл с заявкой</label>
-                        <input type="file" name="pdfFile" placeholder="Заявка в формате PDF" class="form-control">
+                        <label class='form-label'>Тип транспортного средства/шасси</label>
+                        <input type="text" name="type" placeholder="Введите тип транспортного средства/шасси" class="form-control">
                     </div><br>
 
                     <div class='form-group mb-2'>
-                        <label class='form-label'>Приложите архив с документами по заявке</label>
-                        <input type="file" name="zipFile" placeholder="Архив с документами" class="form-control">
+                        <label class='form-label'>Приложите файл с заявкой</label>
+                        <input type="file" name="pdfFileRequest" placeholder="Заявка в формате PDF" class="form-control">
+                    </div><br>
+
+                    <div class='form-group mb-2'>
+                        <label class='form-label'>Приложите файл с Общим техническим описанием</label>
+                        <input type="file" name="pdfFileOTO" placeholder="Архив с документами" class="form-control">
                     </div><br>
 
                     <div class='form-group mb-2'>
