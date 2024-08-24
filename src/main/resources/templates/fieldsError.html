@@ -9,14 +9,19 @@
 <body>
 
 <header th:insert="blocks/header :: header"></header>
-
+<br>
+<br>
 <div class="container">
-    <br/>
-    <h1 class='text-center'> <font size="10" color="#7cfc00" ><b>&#10003</b></font> Заявка подана!</h1>
-    <br/>
-    <h3 class='text-center'>В ближайшее время с Вами свяжется назначенный эксперт</h3>
-    <h3 class='text-center'>По всем вопросам Вы можете обратиться по адресу: zakl.nami@mail.ru</h3>
+
+    <h2 class='text-center'> <font size="10" color="#7cfc00" ><b>&#10060</b></font> Ошибка подачи заявки </h2>
+    <h4 class='text-center'>Заполните все поля, отмеченные '*'</h4>
+    <br>
+    <div style="text-align:center">
+        <button type="submit" class="btn btn-warning" onclick="history.go(-1)">Продолжить заполнение формы подачи заявки</button>
+    </div>
 </div>
+
+
 
 <footer th:insert="blocks/footer :: footer"></footer>
 

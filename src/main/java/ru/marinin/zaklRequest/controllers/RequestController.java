@@ -1,5 +1,6 @@
 package ru.marinin.zaklRequest.controllers;
 
+import org.apache.kafka.common.protocol.types.Field;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +26,19 @@ public class RequestController {
                              @RequestParam String description, Model model) throws IOException {
         MultipartFileToFile.saveMultipartFile(pdfFileRequest, "../Request");
         MultipartFileToFile.saveMultipartFile(pdfFileOTO, "../Request");
+        if (factoryName.isBlank() || personData.isBlank() || email.isBlank() || type.isBlank() || pdfFileRequest.isEmpty() || pdfFileOTO.isEmpty()) {
+            return "redirect:/fields_error";
+        }
         return "redirect:/request_answer";
     }
 
     @GetMapping("/request_answer")
     public String answer() {
         return "answer";
+    }
+
+    @GetMapping("/fields_error")
+    public String fieldsError() {
+        return "fieldsError";
     }
 }
