@@ -21,21 +21,14 @@ public class RequestController {
     MyKafkaSender kafkaSender;
 
     @GetMapping("/add")
-    public String addProductForm() {
+    public String addRequestForm() {
         return "addNewRequest";
     }
 
     @PostMapping("/add")
-    public String addProduct(@RequestParam String factoryName, @RequestParam String personData, @RequestParam String email, @RequestParam String type,
+    public String addRequest(@RequestParam String factoryName, @RequestParam String personData, @RequestParam String email, @RequestParam String type,
                              @RequestParam("fileRequest") MultipartFile fileRequest, @RequestParam("fileOTO") MultipartFile fileOTO,
                              @RequestParam String description, Model model) throws IOException {
-
-        System.out.println(fileRequest.getContentType());
-        System.out.println(fileOTO.getContentType());
-
-        //   application/pdf
-        //   application/vnd.openxmlformats-officedocument.wordprocessingml.document
-        //   application/msword
 
         if (fileRequest.getContentType() == null || fileOTO.getContentType() == null) {
             return "redirect:/fields_error";
@@ -53,12 +46,13 @@ public class RequestController {
             return "redirect:/fields_error";
         }
 
-        String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
-        String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
-
         if (factoryName.isBlank() || personData.isBlank() || email.isBlank() || type.isBlank() || fileRequest.isEmpty() || fileOTO.isEmpty()) {
             return "redirect:/fields_error";
         } else {
+
+            String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
+            String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
+
             Request request = new Request.Builder()
                     .factoryName(factoryName)
                     .personData(personData)
@@ -68,8 +62,9 @@ public class RequestController {
                     .pathToFileOTO(pathToFileOTO)
                     .description(description)
                     .build();
-            System.out.println(request);
+
             kafkaSender.sendMessage(request, "request_topic");
+
             return "redirect:/request_answer";
         }
     }
