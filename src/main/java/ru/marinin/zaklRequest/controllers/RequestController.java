@@ -37,7 +37,7 @@ public class RequestController {
         //   application/vnd.openxmlformats-officedocument.wordprocessingml.document
         //   application/msword
 
-        if (fileRequest.getContentType() == null) {
+        if (fileRequest.getContentType() == null || fileOTO.getContentType() == null) {
             return "redirect:/fields_error";
         }
 
