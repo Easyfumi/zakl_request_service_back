@@ -19,6 +19,7 @@ import java.nio.file.Path;
 public class RequestController {
     @Autowired
     MyKafkaSender kafkaSender;
+
     @GetMapping("/add")
     public String addProductForm() {
         return "addNewRequest";
@@ -28,6 +29,29 @@ public class RequestController {
     public String addProduct(@RequestParam String factoryName, @RequestParam String personData, @RequestParam String email, @RequestParam String type,
                              @RequestParam("fileRequest") MultipartFile fileRequest, @RequestParam("fileOTO") MultipartFile fileOTO,
                              @RequestParam String description, Model model) throws IOException {
+
+        System.out.println(fileRequest.getContentType());
+        System.out.println(fileOTO.getContentType());
+
+        //   application/pdf
+        //   application/vnd.openxmlformats-officedocument.wordprocessingml.document
+        //   application/msword
+
+        if (fileRequest.getContentType() == null) {
+            return "redirect:/fields_error";
+        }
+
+        if (!(fileRequest.getContentType().startsWith("application/pdf")
+                || fileRequest.getContentType().startsWith("application/vnd.openxmlformats-officedocument")
+                || fileRequest.getContentType().startsWith("application/msword"))) {
+            return "redirect:/fields_error";
+        }
+
+        if (!(fileOTO.getContentType().startsWith("application/pdf")
+                || fileOTO.getContentType().startsWith("application/vnd.openxmlformats-officedocument")
+                || fileOTO.getContentType().startsWith("application/msword"))) {
+            return "redirect:/fields_error";
+        }
 
         String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
         String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
