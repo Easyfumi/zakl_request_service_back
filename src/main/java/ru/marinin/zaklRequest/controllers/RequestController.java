@@ -1,6 +1,7 @@
 package ru.marinin.zaklRequest.controllers;
 
 import org.apache.kafka.common.protocol.types.Field;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,13 +10,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import ru.marinin.zaklRequest.model.Request;
 import ru.marinin.zaklRequest.service.MultipartFileToFile;
+import ru.marinin.zaklRequest.service.MyKafkaSender;
 
 import java.io.IOException;
 import java.nio.file.Path;
 
 @Controller
 public class RequestController {
-
+    @Autowired
+    MyKafkaSender kafkaSender;
     @GetMapping("/add")
     public String addProductForm() {
         return "addNewRequest";
@@ -42,6 +45,7 @@ public class RequestController {
                     .description(description)
                     .build();
             System.out.println(request);
+            kafkaSender.sendMessage(request, "request_topic");
             return "redirect:/request_answer";
         }
     }
