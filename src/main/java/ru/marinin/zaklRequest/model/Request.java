@@ -12,6 +12,8 @@ public class Request {
     private final String personData;
     private final String email;
     private final String type;
+    private final String vehicleType;
+    private final String category;
     private final String pathToFileRequest;
     private final String pathToFileOTO;
     private final String description;
@@ -22,6 +24,8 @@ public class Request {
         this.personData = builder.personData;
         this.email = builder.email;
         this.type = builder.type;
+        this.vehicleType = builder.vehicleType;
+        this.category = builder.category;
         this.pathToFileRequest = builder.pathToFileRequest;
         this.pathToFileOTO = builder.pathToFileOTO;
         this.description = builder.description;
@@ -35,6 +39,8 @@ public class Request {
                 ", personData='" + personData + '\'' +
                 ", email='" + email + '\'' +
                 ", type='" + type + '\'' +
+                ", vehicleType='" + vehicleType + '\'' +
+                ", category='" + category + '\'' +
                 ", pathToFileRequest='" + pathToFileRequest + '\'' +
                 ", pathToFileOTO='" + pathToFileOTO + '\'' +
                 ", description='" + description + '\'' +
@@ -47,6 +53,8 @@ public class Request {
         private String personData;
         private String email;
         private String type;
+        private String vehicleType;
+        private String category;
         private String pathToFileRequest;
         private String pathToFileOTO;
         private String description;
@@ -69,6 +77,16 @@ public class Request {
 
         public Builder type(String type) {
             this.type = type;
+            return this;
+        }
+
+        public Builder vehicleType(String vehicleType) {
+            this.vehicleType = vehicleType;
+            return this;
+        }
+
+        public Builder category(String category) {
+            this.category = category;
             return this;
         }
 
