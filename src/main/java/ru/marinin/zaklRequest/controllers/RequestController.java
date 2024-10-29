@@ -50,27 +50,31 @@ public class RequestController {
         if (factoryName.isBlank() || personData.isBlank() || email.isBlank() || type.isBlank() ||
                 vehicleType.isBlank() || category.isBlank() || fileRequest.isEmpty() || fileOTO.isEmpty()) {
             return "redirect:/fields_error";
-        } else {
-
-            String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
-            String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
-
-            Request request = new Request.Builder()
-                    .factoryName(factoryName)
-                    .personData(personData)
-                    .email(email)
-                    .type(type)
-                    .vehicleType(vehicleType)
-                    .category(category)
-                    .pathToFileRequest(pathToFileRequest)
-                    .pathToFileOTO(pathToFileOTO)
-                    .description(description)
-                    .build();
-
-            kafkaSender.sendMessage(request, "request_topic");
-
-            return "redirect:/request_answer";
         }
+
+        if (vehicleType.equals("Выберите тип объекта") || category.equals("Выберите категорию")) {
+            return "redirect:/fields_error";
+        }
+
+        String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
+        String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
+
+        Request request = new Request.Builder()
+                .factoryName(factoryName)
+                .personData(personData)
+                .email(email)
+                .type(type)
+                .vehicleType(vehicleType)
+                .category(category)
+                .pathToFileRequest(pathToFileRequest)
+                .pathToFileOTO(pathToFileOTO)
+                .description(description)
+                .build();
+
+        kafkaSender.sendMessage(request, "request_topic");
+
+        return "redirect:/request_answer";
+
     }
 
     @GetMapping("/request_answer")
