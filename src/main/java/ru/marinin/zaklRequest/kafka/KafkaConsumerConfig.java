@@ -12,7 +12,6 @@ import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 import org.springframework.kafka.listener.ConcurrentMessageListenerContainer;
 import org.springframework.kafka.support.serializer.JsonDeserializer;
 import ru.marinin.zaklRequest.model.Request;
-import ru.marinin.zaklRequest.model.RequestForConsumer;
 
 
 import java.util.HashMap;
