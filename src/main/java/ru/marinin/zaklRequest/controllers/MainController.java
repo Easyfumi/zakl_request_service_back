@@ -11,10 +11,9 @@ import ru.marinin.zaklRequest.service.UserService;
 public class MainController {
     private final UserService userService;
 
-    @GetMapping("/account")
+    @GetMapping("/lk")
     public String accountController(Model model) {
-
-    model.addAttribute("title", userService.getCurrentUser());
+    model.addAttribute("user", userService.getCurrentUser());
         return "account";
     }
     @GetMapping("/")
