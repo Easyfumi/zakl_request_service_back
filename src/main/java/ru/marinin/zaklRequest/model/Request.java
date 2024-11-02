@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.marinin.zaklRequest.repository.RequestRepository;
 
 @Data
 @Entity
@@ -23,4 +24,17 @@ public class Request {
     private String description;
     private String dateTime;
     private String expertInfo;
+
+    public Request(long internalNumber, String factoryName, String personData, String email, String type, String vehicleType, String category, String description, String dateTime, String expertInfo) {
+        this.internalNumber = internalNumber;
+        this.factoryName = factoryName;
+        this.personData = personData;
+        this.email = email;
+        this.type = type;
+        this.vehicleType = vehicleType;
+        this.category = category;
+        this.description = description;
+        this.dateTime = dateTime;
+        this.expertInfo = expertInfo;
+    }
 }

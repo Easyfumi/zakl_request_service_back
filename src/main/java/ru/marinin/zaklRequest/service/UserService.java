@@ -12,19 +12,18 @@ import ru.marinin.zaklRequest.repository.UserRepository;
 @Service
 @RequiredArgsConstructor
 public class UserService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
     public boolean createUser(User user) {
         String login = user.getUsername();
-        if (userRepository.findByUsername(login)!=null) {
-            System.out.println("ALREADY EXIST");
+        if (userRepository.findByUsername(login) != null) {
             return false;
         } else {
             user.setActive(true);
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             user.getRoles().add(Role.USER);
-            System.out.println("Saving new user with login: " + login + ".");
-            System.out.println(user);
             userRepository.save(user);
             return true;
         }

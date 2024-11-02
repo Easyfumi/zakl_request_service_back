@@ -20,12 +20,10 @@ import java.nio.file.Paths;
 @RestController
 @RequiredArgsConstructor
 public class FileController {
-
+    // TODO наполнить блок catch
     @GetMapping("/downloadRequestSampleNew")
     public ResponseEntity<byte[]> downloadRequestSampleNew() {
-
-                Path path = Paths.get("src/main/resources/static/files/Заявка_Правила_получение.docx");
-
+        Path path = Paths.get("src/main/resources/static/files/Заявка_Правила_получение.docx");
         byte[] content = null;
         try {
             content = Files.readAllBytes(path);
@@ -36,12 +34,10 @@ public class FileController {
         httpHeaders.set(HttpHeaders.CONTENT_DISPOSITION, ContentDisposition.attachment().filename("Request_Sample_NAMI_new.docx").build().toString());
         return ResponseEntity.ok().headers(httpHeaders).body(content);
     }
-
+    // TODO наполнить блок catch
     @GetMapping("/downloadRequestSampleExt")
     public ResponseEntity<byte[]> downloadRequestSampleExt() {
-
         Path path = Paths.get("src/main/resources/static/files/Заявка_Правила_распространение.docx");
-
         byte[] content = null;
         try {
             content = Files.readAllBytes(path);

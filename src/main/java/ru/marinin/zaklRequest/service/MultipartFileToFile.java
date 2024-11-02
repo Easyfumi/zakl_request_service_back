@@ -7,22 +7,18 @@ import java.util.UUID;
 
 public class MultipartFileToFile {
 
-
-    public static String saveMultipartFile(MultipartFile file, String targetDirPath){
+    // TODO наполнить блок catch; что за assert он посоветовал воткнуть??
+    public static String saveMultipartFile(MultipartFile file, String targetDirPath) {
 
         File toFile = null;
         if (file.equals("") || file.getSize() <= 0) {
             return null;
         } else {
-
-
             String originalFilename = file.getOriginalFilename();
-
+            assert originalFilename != null;
             String fileFormat = originalFilename.substring(originalFilename.lastIndexOf("."));
-
             String uuid = UUID.randomUUID().toString().trim().replaceAll("-", "");
             toFile = new File(targetDirPath + File.separator + uuid + fileFormat);
-
             String absolutePath = null;
             try {
                 absolutePath = toFile.getCanonicalPath();
@@ -32,21 +28,16 @@ public class MultipartFileToFile {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-
                 InputStream ins = file.getInputStream();
-
                 inputStreamToFile(ins, toFile);
                 ins.close();
-
             } catch (IOException e) {
-                e.printStackTrace();
             }
-
             return absolutePath;
         }
 
     }
-
+    // TODO наполнить блок catch
     private static void inputStreamToFile(InputStream ins, File file) {
         try {
             OutputStream os = new FileOutputStream(file);
@@ -58,7 +49,6 @@ public class MultipartFileToFile {
             os.close();
             ins.close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 

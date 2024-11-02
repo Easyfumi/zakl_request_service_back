@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.marinin.zaklRequest.model.KafkaRequest;
+import ru.marinin.zaklRequest.model.RequestForProducer;
 import ru.marinin.zaklRequest.service.MultipartFileToFile;
 import ru.marinin.zaklRequest.service.MyKafkaSender;
 
@@ -57,7 +57,7 @@ public class RequestController {
         String pathToFileRequest = MultipartFileToFile.saveMultipartFile(fileRequest, "../Request");
         String pathToFileOTO = MultipartFileToFile.saveMultipartFile(fileOTO, "../Request");
 
-        KafkaRequest kafkaRequest = new KafkaRequest.Builder()
+        RequestForProducer requestForProducer = new RequestForProducer.Builder()
                 .factoryName(factoryName)
                 .personData(personData)
                 .email(email)
@@ -69,7 +69,7 @@ public class RequestController {
                 .description(description)
                 .build();
 
-        kafkaSender.sendMessage(kafkaRequest, "request_topic");
+        kafkaSender.sendMessage(requestForProducer, "request_topic_1");
 
         return "redirect:/request_answer";
 

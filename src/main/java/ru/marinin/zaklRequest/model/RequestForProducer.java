@@ -7,7 +7,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class KafkaRequest {
+public class RequestForProducer {
     private final String factoryName;
     private final String personData;
     private final String email;
@@ -19,7 +19,7 @@ public class KafkaRequest {
     private final String description;
     private final LocalDateTime localDateTime;
 
-    private KafkaRequest(Builder builder) {
+    private RequestForProducer(Builder builder) {
         this.factoryName = builder.factoryName;
         this.personData = builder.personData;
         this.email = builder.email;
@@ -110,9 +110,9 @@ public class KafkaRequest {
             return this;
         }
 
-        public KafkaRequest build() {
+        public RequestForProducer build() {
             this.localDateTime();
-            return new KafkaRequest(this);
+            return new RequestForProducer(this);
         }
     }
 

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>ru.marinin</groupId>
-	<artifactId>zaklRequest</artifactId>
+	<artifactId>RequestExternalAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>zaklRequest</name>
 	<description>Demo project for Spring Boot</description>

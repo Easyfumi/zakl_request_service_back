@@ -9,7 +9,7 @@ import org.springframework.kafka.core.DefaultKafkaProducerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
-import ru.marinin.zaklRequest.model.KafkaRequest;
+import ru.marinin.zaklRequest.model.RequestForProducer;
 
 
 import java.util.HashMap;
@@ -31,12 +31,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, KafkaRequest> producerFactory() {
+    public ProducerFactory<String, RequestForProducer> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, KafkaRequest> kafkaTemplate() {
+    public KafkaTemplate<String, RequestForProducer> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

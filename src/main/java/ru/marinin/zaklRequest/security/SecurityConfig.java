@@ -30,27 +30,19 @@ public class SecurityConfig {
     final UserRepository userRepository;
 
 
-
     @Bean
     UserDetailsService userDetailsService() {
         return username -> {
-          //  System.out.println(username+" AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             ru.marinin.zaklRequest.model.User user = userRepository.findByUsername(username);
-            //System.out.println(todoUser.getPassword());
             if (user != null) {
-
-                //System.out.println(role.getClass());
                 var x = user.getRoles().stream().toList().getFirst();
-
                 User user1 = new User(user.getUsername(), user.getPassword(), List.of(x));
                 System.out.println(user1);
                 return user1;
             }
-
             return null;
         };
     }
-
 
 
     @Bean
@@ -60,9 +52,9 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/registration", "/login", "/logout", "/",
-                            "/image","/downloadRequestSampleNew", "/downloadRequestSampleExt").permitAll();
+                            "/image", "/downloadRequestSampleNew", "/downloadRequestSampleExt").permitAll();
                     auth.requestMatchers("/add", "/lk").hasAnyAuthority("USER");
-                //    auth.requestMatchers().hasAnyAuthority("ADMIN");
+                    //    auth.requestMatchers().hasAnyAuthority("ADMIN");
                 })
                 .formLogin(formLogin ->
                         formLogin
