@@ -3,7 +3,6 @@ package ru.marinin.zaklRequest.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.marinin.zaklRequest.model.Request;
-import ru.marinin.zaklRequest.model.RequestForConsumer;
 import ru.marinin.zaklRequest.repository.RequestRepository;
 
 @Service
