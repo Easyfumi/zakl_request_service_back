@@ -53,7 +53,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/registration", "/login", "/logout", "/",
                             "/image", "/downloadRequestSampleNew", "/downloadRequestSampleExt").permitAll();
-                    auth.requestMatchers("/add", "/lk").hasAnyAuthority("USER");
+                    auth.requestMatchers("/add", "/lk", "/request_answer").hasAnyAuthority("USER");
                     //    auth.requestMatchers().hasAnyAuthority("ADMIN");
                 })
                 .formLogin(formLogin ->
